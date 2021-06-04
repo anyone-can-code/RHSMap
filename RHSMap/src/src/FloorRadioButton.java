@@ -19,22 +19,8 @@ public class FloorRadioButton  extends JRadioButton {
         */
 
         try {
-            switch (floor) {
-                case 1:
-                    offIcon = ImageIO.read(new File("src/resources/1-light.png"));
-                    onIcon = ImageIO.read(new File("src/resources/1-dark.png"));
-                    break;
-                
-                case 2:
-                    offIcon = ImageIO.read(new File("src/resources/2-light.png"));
-                    onIcon = ImageIO.read(new File("src/resources/2-dark.png"));
-                    break;
-                
-                case 3:
-                    offIcon = ImageIO.read(new File("src/resources/3-light.png"));
-                    onIcon = ImageIO.read(new File("src/resources/3-dark.png"));
-                    break;
-            }
+        	offIcon = ImageIO.read(getClass().getResourceAsStream("src/resources/" + floor + "-light.png"));
+            onIcon = ImageIO.read(getClass().getResourceAsStream("src/resources/" + floor + "-dark.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,10 +30,7 @@ public class FloorRadioButton  extends JRadioButton {
     public void paint(Graphics g) {
         int size = Math.min(getWidth(), getHeight());
 
-        if (isSelected()) {
-            g.drawImage(onIcon, 0, 0, size, size, this);
-        } else {
-            g.drawImage(offIcon, 0, 0, size, size, this);
-        }
+        if (isSelected()) g.drawImage(onIcon, 0, 0, size, size, this);
+        else g.drawImage(offIcon, 0, 0, size, size, this);
     }
 }
