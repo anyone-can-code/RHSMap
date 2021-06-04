@@ -3,7 +3,6 @@ package src;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -11,17 +10,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import src.FloorRadioButton;
-import src.ZoomButton;
 
 public class Main extends JPanel implements Runnable, MouseMotionListener, MouseListener {
 	double viewX = 0;
@@ -40,10 +33,11 @@ public class Main extends JPanel implements Runnable, MouseMotionListener, Mouse
 
 	public Main() {
 		try {
-			map = ImageIO.read(new File("src/resources/map.png"));
+			map = ImageIO.read(getClass().getResourceAsStream("/resources/map.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		setVisible(true);
 		setFocusable(true);
 		addMouseListener(this);
@@ -55,15 +49,11 @@ public class Main extends JPanel implements Runnable, MouseMotionListener, Mouse
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(Box.createVerticalGlue());
 		ZoomButton b = new ZoomButton(true);
-		b.addActionListener(e -> {
-			zoomMomentum = -0.05;
-		});
+		b.addActionListener(e -> zoomMomentum = -0.05);
 		b.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(b);
 		b = new ZoomButton(false);
-		b.addActionListener(e -> {
-			zoomMomentum = 0.05;
-		});
+		b.addActionListener(e -> zoomMomentum = 0.05);
 		b.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(b);
 	}
@@ -93,7 +83,7 @@ public class Main extends JPanel implements Runnable, MouseMotionListener, Mouse
 		}
 
 		zoom += zoomMomentum *= 0.9;
-		zoom += zoom < 0.5 ? (0.5 - zoom)/10 : zoom > 2 ? -(zoom - 2)/10: 0;
+		zoom += zoom < 0.5 ? (0.5 - zoom)/10 : zoom > 2 ? -(zoom - 2)/10 : 0;
 	} 
 	
 	public void run() {

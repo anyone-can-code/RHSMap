@@ -23,11 +23,8 @@ public class ZoomButton extends JButton {
 
         // load the correct icon
         try {
-            if (zoomsIn) {
-                icon = ImageIO.read(new File("src/resources/search-zoom.png"));
-            } else {
-                icon = ImageIO.read(new File("src/resources/search-minus.png"));
-            }
+            if (zoomsIn) icon = ImageIO.read(getClass().getResourceAsStream("src/resources/search-zoom.png"));
+            else icon = ImageIO.read(getClass().getResourceAsStream("src/resources/search-minus.png"));
         } catch (IOException e) {
             icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
         }
