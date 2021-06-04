@@ -20,6 +20,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import src.FloorRadioButton;
+import src.ZoomButton;
+
 public class Main extends JPanel implements Runnable, MouseMotionListener, MouseListener {
 	double viewX = 0;
 	double viewY = 0;
